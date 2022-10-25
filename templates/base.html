@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2022</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    {% block content %}
+
+        <div class="main">
+
+            <div class="text-boxes">
+                <div class="main-2">
+
+                    <div class="title-1">
+                        <span>Male Players</span>
+                        <span>({{male_players}})</span>
+                        <span class="error">{{ error }}</span>
+                    </div>
+    
+                    <div id="form-comp-1">
+                        <form action="" id="form-1" method="post">
+                            {% csrf_token %}
+                            <textarea name="name" id="textarea-1" cols="30" rows="10"></textarea>
+                            <input class="btn-1" type="submit" value="Shuffle Male" name="Shuffle_Males">
+                            
+                            <input type="submit" value="Clear" name="Clear" id="clear-btn">
+                        </form>
+                    </div>
+    
+                </div>
+    
+                <div class="main-2">
+                    
+    
+                    <div class="title-1">
+                        <span>Female Players</span>
+                        <span>({{female_players}})</span>
+                        <span class="error">{{ error2 }}</span>
+                        
+                    </div>
+    
+                    <div id="form-comp-1">
+                        <form action="" id="form-1" method="post">
+                            {% csrf_token %}
+                            <textarea name="name2" id="textarea-1" cols="30" rows="10"></textarea>
+                            <input class="btn-1" type="submit" value="Shuffle Female" name="Shuffle_Females">
+                            <input type="submit" value="Clear" name="Clear" id="clear-btn">
+                        </form>
+                    </div>
+    
+                </div>
+            </div>
+
+            <div class="table-1">
+
+                {% for i in all_team_list %}
+                    <div class="box">
+                        <span class="team_name">Team {{forloop.counter}}</span>
+                        <div class="names">
+                            {% for k in i %}
+                                <div class="names-line">
+                                    <span class="line-number">{{forloop.counter}}.</span>
+                                    <span>{{ k }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    {% endblock %}
+</body>
+
+<style>
+    .main{
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        overflow: auto;
+        flex-direction: column;
+        min-height: calc(100vh - 50px);
+    }
+    .text-boxes{
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        height: 600px;
+    }
+    .main-2{
+        display: flex;
+        flex-direction: column;
+        width: 45%;
+        height: 100%;
+    }
+
+    .title-1{
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    #form-comp-1{
+        width: 100%;
+        height: 100%;
+    }
+
+    #form-1{
+        width: 100%;
+        height: 100%;
+        font-family: monospace;
+        background: #282a3a;
+    }
+    #textarea-1{
+        width: 100%;
+        height: 100%;
+        resize: none;
+        padding: 12px;
+        border: none;
+        outline: none;
+        background: #282a3a;
+        color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .btn-1{
+        color: #28a745;
+        background-color: #fff;
+        border-color: #28a745;
+        padding: 10px 28px;
+        cursor: pointer;
+        margin: 10px 10px;
+    }
+
+    .btn-1:hover {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .table-1{
+        margin-top: 150px;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 500px;
+    }
+
+
+    .box{
+        width: 350px;
+        height: 400px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        margin-bottom: 20px;
+    }
+
+    .team_name{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        width: 100%;
+        height: 30px;
+        color: #fff;
+    }
+
+    .names{
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .names-line{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        height: 35px;
+    }
+
+    .line-number{
+        width: 10%;
+    }
+
+    .clear-btn-male{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 35px;
+        margin-top: 80px;
+    }
+
+    #clear-btn{
+        color: #fff;
+        background-color: #dd1a1a;
+        border-color: #dd1a1a;
+        padding: 10px 28px;
+        cursor: pointer;
+        margin: 10px 10px;
+    }
+
+    #clear-btn:hover{
+        color: #fff;
+        background-color: #f15f5f;
+        border-color: #f15f5f;
+        padding: 10px 28px;
+        cursor: pointer;
+        margin: 10px 10px;
+    }
+
+    .error{
+        margin-left: 40px;
+        color: #dd1a1a;
+        font-size: small;
+    }
+</style>
+
+</html>
